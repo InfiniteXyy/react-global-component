@@ -19,7 +19,7 @@ function reducer(state: { count: number }, action: { type: string; payload?: num
 }
 
 export const GlobalCounter2 = defineGlobalComponent({
-  share: { rtc: { key: "counter2" } },
+  share: { yjs: { key: "counter2" } },
   render: ({ uniqId }: { uniqId: string }) => {
     const [state, dispatch] = useReducer(reducer, null, init);
     return (

@@ -9,7 +9,7 @@ function App() {
       <h3>Persisted Counter and Input</h3>
       <GlobalCounter1 />
       <GlobalCounter1 />
-      <h3>WebRTC shared counter</h3>
+      <h3>Yjs(over websocket) shared counter</h3>
       <GlobalCounter2 uniqId={`1`} />
       <GlobalCounter2 uniqId={`2`} />
     </>

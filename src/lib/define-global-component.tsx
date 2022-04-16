@@ -5,7 +5,7 @@ import { withPersist, withYjs } from "./share-features";
 import { withCustomApi } from "./override-react";
 
 type GlobalComponentOption<Props> = {
-  share?: { rtc?: { key: string }; persist?: { key: string } };
+  share?: { yjs?: { key: string }; persist?: { key: string } };
   render: (props: Props) => JSX.Element;
 };
 
@@ -13,7 +13,7 @@ export function defineGlobalComponent<Props = {}>(option: GlobalComponentOption<
   const { share, render } = option;
   let store = proxy<Record<string, unknown>>({});
   if (share?.persist) store = withPersist(store, share.persist?.key);
-  if (share?.rtc) store = withYjs(store, share.rtc.key);
+  if (share?.yjs) store = withYjs(store, share.yjs.key);
 
   let maxStateIndex: number;
   return React.memo(function (props: Props) {

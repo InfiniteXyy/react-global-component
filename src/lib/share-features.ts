@@ -12,6 +12,7 @@ const initYjs = memoize(() => {
     room = nanoid();
     window.history.replaceState(null, "", "?room=" + room);
   }
+  // FIXME: remove demo server
   new WebsocketProvider("wss://yjs-backend.fly.dev", room, ydoc);
   return ydoc;
 });
