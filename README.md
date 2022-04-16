@@ -24,7 +24,7 @@ npm run dev
 ```tsx
 const GlobalCounter2 = defineGlobalComponent({
   share: { rtc: { key: "counter2" }, persist: { key: "counter2" } },
-  getComponent: ({ useState }) => {
+  render: () => {
     return ({ prefix }: { prefix: string }) => {
       const [count, setCount] = useState(0);
       return (
