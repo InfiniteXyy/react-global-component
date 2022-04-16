@@ -1,0 +1,6 @@
+{
+  "extends": "@vercel/style-guide/typescript",
+  "compilerOptions": {
+    "jsx": "react-jsx"
+  }
+}
