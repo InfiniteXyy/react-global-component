@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { defineGlobalComponent } from "./define-global-component";
 
 const GlobalCounter1 = defineGlobalComponent({
+  share: { persist: { key: "counter1" } },
   getComponent: ({ useState }) => {
     return () => {
       const [count, setCount] = useState(0);
@@ -18,7 +19,7 @@ const GlobalCounter1 = defineGlobalComponent({
 });
 
 const GlobalCounter2 = defineGlobalComponent({
-  share: { rtc: { key: "counter2" }, persist: { key: "counter2" } },
+  share: { rtc: { key: "counter2" } },
   getComponent: ({ useState }) => {
     return ({ uniqId }: { uniqId: string }) => {
       const [count, setCount] = useState(0);
@@ -41,10 +42,10 @@ function App() {
     <>
       <h3>Outer Input</h3>
       <input value={outerInput} onChange={(e) => setOuterInput(e.target.value)} />
-      <h3>Counter and Input</h3>
+      <h3>Persisted Counter and Input</h3>
       <GlobalCounter1 />
       <GlobalCounter1 />
-      <h3>WebRTC and localStorage shared counter</h3>
+      <h3>WebRTC shared counter</h3>
       <GlobalCounter2 uniqId={`${outerInput}1`} />
       <GlobalCounter2 uniqId={`${outerInput}2`} />
     </>
