@@ -1,6 +1,12 @@
 {
   "extends": "@vercel/style-guide/typescript",
   "compilerOptions": {
-    "jsx": "react-jsx"
+    "target": "ESNext",
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ]
   }
 }
