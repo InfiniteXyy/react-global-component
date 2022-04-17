@@ -1,34 +1,46 @@
-import { nanoid } from "nanoid";
 import { bindProxyAndYMap } from "valtio-yjs";
 import * as Y from "yjs";
 import memoize from "memoize-one";
 import { subscribe } from "valtio";
 import { WebsocketProvider } from "y-websocket";
+import { WebrtcProvider } from "y-webrtc";
 
-const initYjs = memoize(() => {
+export type YjsOption = { key: string; roomId: string; onYDocCreated?: (ydoc: Y.Doc) => void } & (
+  | { type: "ws"; serverUrl: string; options?: ConstructorParameters<typeof WebsocketProvider>[3] }
+  | { type: "rtc"; options?: ConstructorParameters<typeof WebrtcProvider>[2] }
+);
+
+const initYjs = memoize((options: YjsOption) => {
   const ydoc = new Y.Doc();
-  let room = new URLSearchParams(location.search).get("room");
-  if (!room) {
-    room = nanoid();
-    window.history.replaceState(null, "", "?room=" + room);
+  if (options.type === "rtc") {
+    new WebrtcProvider(options.roomId, ydoc, options.options);
+  } else {
+    new WebsocketProvider(options.serverUrl, options.roomId, ydoc, options.options);
   }
-  // FIXME: remove demo server
-  new WebsocketProvider("wss://yjs-backend.fly.dev", room, ydoc);
+  options.onYDocCreated?.(ydoc);
   return ydoc;
 });
 
-initYjs();
-
-export function withYjs(store: Record<string, unknown>, key: string) {
-  const ydoc = initYjs();
-  bindProxyAndYMap(store, ydoc.getMap(key));
+export function withYjs(store: Record<string, unknown>, options: YjsOption) {
+  const ydoc = initYjs(options);
+  bindProxyAndYMap(store, ydoc.getMap(options.key));
   return store;
 }
 
-export function withPersist(store: Record<string, unknown>, key: string) {
-  Object.assign(store, JSON.parse(localStorage.getItem(key) || "{}"));
+export type PersistOption = { persistKey: string; watch?: boolean };
+
+export function withPersist(store: Record<string, unknown>, options: PersistOption) {
+  function loadPersistData() {
+    Object.assign(store, JSON.parse(localStorage.getItem(options.persistKey) || "{}"));
+  }
   subscribe(store, () => {
-    localStorage.setItem(key, JSON.stringify(store));
+    localStorage.setItem(options.persistKey, JSON.stringify(store));
   });
+
+  loadPersistData();
+  if (options.watch) {
+    window.addEventListener("storage", loadPersistData);
+  }
+
   return store;
 }

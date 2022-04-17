@@ -2,7 +2,7 @@ import { useState } from "react";
 import { defineGlobalComponent } from "./lib";
 
 export const GlobalCounter1 = defineGlobalComponent({
-  share: { persist: { key: "counter1" } },
+  share: { persist: { persistKey: "counter1", watch: true } },
   render: () => {
     const [count, setCount] = useState(0);
     const [input, setInput] = useState("");

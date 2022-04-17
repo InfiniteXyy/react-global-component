@@ -1,19 +1,19 @@
 import type { ComponentType } from "react";
 import React from "react";
 import { proxy, useSnapshot } from "valtio";
-import { withPersist, withYjs } from "./share-features";
+import { withPersist, withYjs, YjsOption, PersistOption } from "./share-features";
 import { withCustomApi } from "./override-react";
 
 type GlobalComponentOption<Props> = {
-  share?: { yjs?: { key: string }; persist?: { key: string } };
+  share?: { yjs?: YjsOption; persist?: PersistOption };
   render: (props: Props) => JSX.Element;
 };
 
 export function defineGlobalComponent<Props = {}>(option: GlobalComponentOption<Props>): ComponentType<Props> {
   const { share, render } = option;
   let store = proxy<Record<string, unknown>>({});
-  if (share?.persist) store = withPersist(store, share.persist?.key);
-  if (share?.yjs) store = withYjs(store, share.yjs.key);
+  if (share?.persist) store = withPersist(store, share.persist);
+  if (share?.yjs) store = withYjs(store, share.yjs);
 
   let maxStateIndex: number;
   return React.memo(function (props: Props) {

@@ -19,7 +19,7 @@ function reducer(state: { count: number }, action: { type: string; payload?: num
 }
 
 export const GlobalCounter2 = defineGlobalComponent({
-  share: { yjs: { key: "counter2" } },
+  share: { yjs: { key: "counter2", roomId: "default", type: "ws", serverUrl: "wss://yjs-backend.fly.dev" } },
   render: ({ uniqId }: { uniqId: string }) => {
     const [state, dispatch] = useReducer(reducer, null, init);
     return (

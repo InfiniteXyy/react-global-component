@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "memoize-one": "^6.0.0",
-    "nanoid": "^3.3.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "valtio": "^1.5.2",
