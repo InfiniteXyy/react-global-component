@@ -18,7 +18,7 @@ function reducer(state: { count: number }, action: { type: string; payload?: num
   }
 }
 
-export const GlobalCounter2 = defineGlobalComponent({
+const GlobalCounter2 = defineGlobalComponent({
   plugins: [yjs({ key: "counter2", roomId: "default", type: "ws", serverUrl: "wss://yjs-backend.fly.dev" })],
   getComponent({ useReducer }) {
     return ({ uniqId }: { uniqId: string }) => {
@@ -36,3 +36,13 @@ export const GlobalCounter2 = defineGlobalComponent({
     };
   },
 });
+
+export function DemoYjs() {
+  return (
+    <div>
+      <h3>Yjs(over websocket) shared counter</h3>
+      <GlobalCounter2 uniqId={`1`} />
+      <GlobalCounter2 uniqId={`2`} />
+    </div>
+  );
+}

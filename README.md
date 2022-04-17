@@ -10,7 +10,7 @@ This tools allows you to define a global component, wherever you use it, all com
 
 **Note**: This tools is not production ready, it is just a demo, and lack of tests.
 
-## Try
+## Example
 
 ```bash
 npm install react-global-component valtio
@@ -18,8 +18,6 @@ npm install react-global-component valtio
 # Optional dependencies, install if you want to use the yjs shared features
 npm install yjs valtio-yjs y-websocket y-webrtc
 ```
-
-## Example
 
 ```tsx
 const GlobalCounter2 = defineGlobalComponent({
@@ -38,6 +36,46 @@ const GlobalCounter2 = defineGlobalComponent({
 // Use in anywhere, it will share the same state
 <GlobalCounter prefix="1" />
 <GlobalCounter prefix="2" />
+```
+
+## Use Cases
+
+### 1. keep-alive
+
+Use it to prevent your component state from being destroyed. For example, in a tab switch case.
+
+### 2. Global state provider
+
+Use this lib as a global state provider. Your cans share the state between different components.
+
+And with the support of Yjs, you can easily share you global state over WebSocket or WebRTC
+
+```tsx
+const Provider = defineGlobalComponent({
+  getComponent({ useState }) {
+    return ({ component: Comp }) => {
+      const [count, setCount] = useState(0);
+      return <Comp count={count} />;
+    };
+  },
+});
+
+<Provider component={YourComponent} />;
+```
+
+### 3. Persist your component
+
+Use the persist plugin, It's so easy to persist a component, without any special api, just use `useState` or `useReducer`
+
+```tsx
+const Provider = defineGlobalComponent({
+  plugins: [persist({ key: "xxx" })],
+  getComponent({ useState }) {
+    ...
+  },
+});
+
+<Provider component={YourComponent} />;
 ```
 
 ## How

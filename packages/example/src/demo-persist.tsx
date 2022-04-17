@@ -1,7 +1,7 @@
 import { defineGlobalComponent } from "react-global-component";
 import { persist } from "react-global-component/plugin-persist";
 
-export const GlobalCounter1 = defineGlobalComponent({
+const GlobalCounter1 = defineGlobalComponent({
   plugins: [persist({ persistKey: "counter1", watch: true })],
   getComponent({ useState }) {
     return () => {
@@ -16,3 +16,13 @@ export const GlobalCounter1 = defineGlobalComponent({
     };
   },
 });
+
+export function DemoPersist() {
+  return (
+    <div>
+      <h3>Persisted Counter and Input</h3>
+      <GlobalCounter1 />
+      <GlobalCounter1 />
+    </div>
+  );
+}

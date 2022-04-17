@@ -1,20 +1,19 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { GlobalCounter1 } from "./counter1";
-import { GlobalCounter2 } from "./counter2";
-import { GlobalTodo } from "./todo";
+import { DemoKeepAlive } from "./demo-keep-alive";
+import { DemoPersist } from "./demo-persist";
+import { DemoProvider } from "./demo-provider";
+import { DemoTodoYjs } from "./demo-todo-yjs";
+import { DemoYjs } from "./demo-yjs";
 
 function App() {
   return (
     <>
-      <h3>Persisted Counter and Input</h3>
-      <GlobalCounter1 />
-      <GlobalCounter1 />
-      <h3>Yjs(over websocket) shared counter</h3>
-      <GlobalCounter2 uniqId={`1`} />
-      <GlobalCounter2 uniqId={`2`} />
-      <h3>Yjs(over webrtc) shared TodoList</h3>
-      <GlobalTodo />
+      <DemoPersist />
+      <DemoYjs />
+      <DemoTodoYjs />
+      <DemoKeepAlive />
+      <DemoProvider />
     </>
   );
 }
