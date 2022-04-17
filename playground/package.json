@@ -1,0 +1,6 @@
+{
+  "name": "playground",
+  "scripts": {
+    "dev": "vite"
+  }
+}
