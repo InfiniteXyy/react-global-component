@@ -10,6 +10,7 @@ This tools allows you to define a global component, wherever you use it, all com
 
 **Note**: This tools is not production ready, it is just a demo, and lack of tests.
 
+Try the example App on [codesandbox](https://codesandbox.io/s/react-global-component-example-wldiep)
 ## Example
 
 ```bash
