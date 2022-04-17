@@ -2,15 +2,14 @@ import type { ComponentType } from "react";
 import React from "react";
 import { proxy, useSnapshot } from "valtio";
 import { withPersist, withYjs, YjsOption, PersistOption } from "./share-features";
-import { withCustomApi } from "./override-react";
 
 type GlobalComponentOption<Props> = {
   share?: { yjs?: YjsOption; persist?: PersistOption };
-  render: (props: Props) => JSX.Element;
+  getComponent: (api: Pick<typeof React, "useState" | "useReducer">) => (props: Props) => JSX.Element;
 };
 
 export function defineGlobalComponent<Props = {}>(option: GlobalComponentOption<Props>): ComponentType<Props> {
-  const { share, render } = option;
+  const { share, getComponent } = option;
   let store = proxy<Record<string, unknown>>({});
   if (share?.persist) store = withPersist(store, share.persist);
   if (share?.yjs) store = withYjs(store, share.yjs);
@@ -50,6 +49,6 @@ export function defineGlobalComponent<Props = {}>(option: GlobalComponentOption<
 
     React.useEffect(() => void (maxStateIndex ??= stateIndex), []);
 
-    return withCustomApi(() => render(props), customApi);
+    return getComponent(customApi as any)(props);
   }) as unknown as ComponentType<Props>;
 }

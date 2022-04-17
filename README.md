@@ -23,7 +23,7 @@ npm install yjs valtio-yjs y-websocket y-webrtc
 
 ```tsx
 const GlobalCounter2 = defineGlobalComponent({
-  render: () => {
+  getComponent({ useState }) {
     return ({ prefix }: { prefix: string }) => {
       const [count, setCount] = useState(0);
       return (
@@ -31,7 +31,7 @@ const GlobalCounter2 = defineGlobalComponent({
           {prefix}: {count}
         </button>
       );
-    };
+    }
   },
 });
 
@@ -50,5 +50,6 @@ All the other features are base on the global state, like persist, or rtc share
 
 ## Todo
 
+- [ ] use babel etc to override the default react hooks implicitly
 - [ ] add tests
 - [x] yjs/persist more options

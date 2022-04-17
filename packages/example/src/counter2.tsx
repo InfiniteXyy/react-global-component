@@ -1,4 +1,3 @@
-import { useReducer } from "react";
 import { defineGlobalComponent } from "react-global-component";
 
 function init() {
@@ -20,17 +19,19 @@ function reducer(state: { count: number }, action: { type: string; payload?: num
 
 export const GlobalCounter2 = defineGlobalComponent({
   share: { yjs: { key: "counter2", roomId: "default", type: "ws", serverUrl: "wss://yjs-backend.fly.dev" } },
-  render: ({ uniqId }: { uniqId: string }) => {
-    const [state, dispatch] = useReducer(reducer, null, init);
-    return (
-      <>
-        <div>[{uniqId}] simple calculator</div>
-        <button onClick={() => dispatch({ type: "decrement" })}>-</button>
-        <b>{state.count}</b>
-        <button onClick={() => dispatch({ type: "increment" })}>+</button>
-        <button onClick={() => dispatch({ type: "increment", payload: 2 })}>+2</button>
-        <button onClick={() => dispatch({ type: "reset" })}>reset</button>
-      </>
-    );
+  getComponent({ useReducer }) {
+    return ({ uniqId }: { uniqId: string }) => {
+      const [state, dispatch] = useReducer(reducer, null, init);
+      return (
+        <>
+          <div>[{uniqId}] simple calculator</div>
+          <button onClick={() => dispatch({ type: "decrement" })}>-</button>
+          <b>{state.count}</b>
+          <button onClick={() => dispatch({ type: "increment" })}>+</button>
+          <button onClick={() => dispatch({ type: "increment", payload: 2 })}>+2</button>
+          <button onClick={() => dispatch({ type: "reset" })}>reset</button>
+        </>
+      );
+    };
   },
 });
