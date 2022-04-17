@@ -1,4 +1,5 @@
 import { defineGlobalComponent } from "react-global-component";
+import { yjs } from "react-global-component/plugin-yjs";
 
 function init() {
   return { count: 2 };
@@ -18,7 +19,7 @@ function reducer(state: { count: number }, action: { type: string; payload?: num
 }
 
 export const GlobalCounter2 = defineGlobalComponent({
-  share: { yjs: { key: "counter2", roomId: "default", type: "ws", serverUrl: "wss://yjs-backend.fly.dev" } },
+  plugins: [yjs({ key: "counter2", roomId: "default", type: "ws", serverUrl: "wss://yjs-backend.fly.dev" })],
   getComponent({ useReducer }) {
     return ({ uniqId }: { uniqId: string }) => {
       const [state, dispatch] = useReducer(reducer, null, init);

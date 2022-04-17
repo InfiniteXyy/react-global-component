@@ -1,7 +1,8 @@
 import { defineGlobalComponent } from "react-global-component";
+import { persist } from "react-global-component/plugin-persist";
 
 export const GlobalCounter1 = defineGlobalComponent({
-  share: { persist: { persistKey: "counter1", watch: true } },
+  plugins: [persist({ persistKey: "counter1", watch: true })],
   getComponent({ useState }) {
     return () => {
       const [count, setCount] = useState(0);

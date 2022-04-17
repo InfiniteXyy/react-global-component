@@ -1,7 +1,8 @@
 import { defineGlobalComponent } from "react-global-component";
+import { yjs } from "react-global-component/plugin-yjs";
 
 export const GlobalTodo = defineGlobalComponent({
-  share: { yjs: { key: "todo", roomId: "@react-shared-components/todolist", type: "rtc" } },
+  plugins: [yjs({ key: "todo", roomId: "@react-shared-components/todolist", type: "rtc" })],
   getComponent({ useState }) {
     return () => {
       type Todo = { title: string; completed: boolean };
