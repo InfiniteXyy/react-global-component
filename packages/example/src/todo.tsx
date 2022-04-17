@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { defineGlobalComponent } from "./lib";
+import { defineGlobalComponent } from "react-global-component";
 
 export const GlobalTodo = defineGlobalComponent({
   share: { yjs: { key: "todo", roomId: "@react-shared-components/todolist", type: "rtc" } },

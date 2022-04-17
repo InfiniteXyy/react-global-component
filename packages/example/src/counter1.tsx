@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { defineGlobalComponent } from "./lib";
+import { defineGlobalComponent } from "react-global-component";
 
 export const GlobalCounter1 = defineGlobalComponent({
   share: { persist: { persistKey: "counter1", watch: true } },

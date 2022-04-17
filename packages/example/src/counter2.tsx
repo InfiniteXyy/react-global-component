@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { defineGlobalComponent } from "./lib";
+import { defineGlobalComponent } from "react-global-component";
 
 function init() {
   return { count: 2 };

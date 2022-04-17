@@ -1,0 +1,22 @@
+{
+  "name": "react-global-component-example",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "valtio": "^1.5.2",
+    "valtio-yjs": "^0.3.1",
+    "y-webrtc": "^10.2.2",
+    "y-websocket": "^1.4.0",
+    "yjs": "^13.5.34",
+    "react-global-component": "workspace:*"
+  }
+}

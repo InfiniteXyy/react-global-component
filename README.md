@@ -1,4 +1,4 @@
-# react-shared-components
+# react-global-component
 
 ## Intro
 
@@ -13,10 +13,10 @@ This tools allows you to define a global component, wherever you use it, all com
 ## Try
 
 ```bash
-npm install
-npm run dev
+npm install react-global-component valtio
 
-# open localhost:1234, and copy the generated url to another tab to see webrtc share
+# Optional dependencies, install if you want to use the yjs shared features
+npm install yjs valtio-yjs y-websocket y-webrtc
 ```
 
 ## Example
@@ -50,6 +50,5 @@ All the other features are base on the global state, like persist, or rtc share
 
 ## Todo
 
-- [ ] why not create a (babel) plugin, to overwrite the useState function implicitly
 - [ ] add tests
-- [ ] yjs/persist more options
+- [x] yjs/persist more options
