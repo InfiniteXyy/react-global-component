@@ -34,7 +34,7 @@
       "require": "./dist/cjs/plugin-yjs.js"
     }
   },
-  "homepage": "https://github.com/InfiniteXyy/zoov",
+  "homepage": "https://github.com/InfiniteXyy/react-global-component",
   "description": "Share your stateful components globally, even over internet",
   "keywords": [
     "React",
